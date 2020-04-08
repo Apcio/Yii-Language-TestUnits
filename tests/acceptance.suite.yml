@@ -1,0 +1,7 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - Yii2:
+            url: http://localhost:8080
+            browser: chrome
+            
