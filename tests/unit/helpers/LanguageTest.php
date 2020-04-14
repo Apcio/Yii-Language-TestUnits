@@ -17,14 +17,14 @@ class LanguageTest extends \Codeception\Test\Unit
     }
 
     public function testLanguageExisted() {
-        $lang = Language::getDefaultLang();
-        expect_that(Language::languageExists($lang));
-        expect_not(Language::languageExists('mm-AA') === null);
+        $lang = Language::getInstance()->getDefaultLang();
+        expect_that(Language::getInstance()->languageExists($lang));
+        expect_not(Language::getInstance()->languageExists('mm-AA') === null);
     }
 
     public function testLanguageShortCode() {
-        expect_that(Language::getLangFromShortCode('en') === 'en-US');
-        expect_that(Language::getLangFromShortCode('PL') === 'pl-PL');
-        expect_that(Language::getLangFromShortCode('EU') === null);
+        expect_that(Language::getInstance()->getLangFromShortCode('en') === 'en-US');
+        expect_that(Language::getInstance()->getLangFromShortCode('PL') === 'pl-PL');
+        expect_that(Language::getInstance()->getLangFromShortCode('EU') === null);
     }
 }

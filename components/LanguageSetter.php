@@ -23,7 +23,7 @@ class LanguageSetter implements BootstrapInterface {
     private function setLangFromCookies(): string {
         $preferedLang = $this->getCookieLang();
         if($preferedLang === null) $preferedLang = $this->getBrowserLang();
-        if($preferedLang === null) $preferedLang = Language::getDefaultLang();
+        if($preferedLang === null) $preferedLang = Language::getInstance()->getDefaultLang();
 
         return $preferedLang;
     }
@@ -45,7 +45,7 @@ class LanguageSetter implements BootstrapInterface {
         } else $preferedLang = null;
 
         if($preferedLang !== null) {
-            $preferedLang = Language::findLanguage($preferedLang);
+            $preferedLang = Language::getInstance()->findLanguage($preferedLang);
         }
 
         if($preferedLang === null) $preferedLang = $this->setLangFromCookies();
@@ -77,11 +77,11 @@ class LanguageSetter implements BootstrapInterface {
 
         $l = null;
         foreach($lang as $k) {
-            $l = Language::findLanguage($k);
+            $l = Language::getInstance()->findLanguage($k);
             if(isset($l)) {
                 return $l;
             } else {
-                $l = Language::getLangFromShortCode($k);
+                $l = Language::getInstance()->getLangFromShortCode($k);
                 if(isset($l)) return $l;
             }
         }
@@ -97,7 +97,7 @@ class LanguageSetter implements BootstrapInterface {
     private function getCookieLang() {
         $lang = $this->app->getRequest()->cookies->getValue('language');
         if($lang === null) return null;
-        return Language::findLanguage($lang);
+        return Language::getInstance()->findLanguage($lang);
     }
 
     /**
@@ -114,11 +114,11 @@ class LanguageSetter implements BootstrapInterface {
                 $lang = $this->setLangFromUser();
             }
 
-            if(!Language::languageExists($lang)) throw new \Exception('Undefined language');
+            if(!Language::getInstance()->languageExists($lang)) throw new \Exception('Undefined language');
         }
         catch(\Exception $e) {
             $this->app->error('Class ' . __CLASS__ . ' - Error Message:\r\n' . $e->getMessage());
-            $lang = Language::getDefaultLang();
+            $lang = Language::getInstance()->getDefaultLang();
         }
 
         $this->languageSet($lang);

@@ -1,0 +1,19 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Server Yii",
+            "type": "shell",
+            "command": "php yii serve",
+            "problemMatcher": []
+        },
+        {
+            "label": "Codecept tests",
+            "type": "shell",
+            "command": "./vendor/bin/codecept run",
+            "problemMatcher": []
+        }
+    ]
+}

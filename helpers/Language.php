@@ -32,7 +32,7 @@ class Language {
      * 
      * @return string Supported default language code.
      */
-    public static function getDefaultLang(): string {
+    public function getDefaultLang(): string {
         $lang = \Yii::$app->request->getPreferredLanguage(self::getInstance()->langAvailable);
         return $lang;
     }
@@ -42,7 +42,7 @@ class Language {
      * 
      * @return array Array of supported language codes.
      */
-    public static function getAvailabeLang(): array {
+    public function getAvailabeLang(): array {
         return self::getInstance()->langAvailable;
     }
 
@@ -52,7 +52,7 @@ class Language {
      * @param $lang String language supported code to be searched.
      * @return bool Return true if language is available, false otherwise.
      */
-    public static function languageExists(string $lang) {
+    public function languageExists(string $lang) {
         $l = \Locale::lookup(self::getInstance()->getAvailabeLang(), $lang, false, '');
         return isset($l);
     }
@@ -63,7 +63,7 @@ class Language {
      * @param string $lang Language code for comparing.
      * @return string|null Return best match language, null when cannot match.
      */
-    public static function findLanguage(string $lang) {
+    public function findLanguage(string $lang) {
         $l = \Locale::lookup(self::getInstance()->getAvailabeLang(), $lang, false);
         if($l === "") $l = null;
         return $l;
@@ -75,7 +75,7 @@ class Language {
      * @param string $lang Short code, contains only language.
      * @return string|null Function return supported language code, or null if not match.
      */
-    public static function getLangFromShortCode(string $lang) {
+    public function getLangFromShortCode(string $lang) {
         if($lang === '') return null;
         $parsed = \Locale::parseLocale($lang);
         
